@@ -1,30 +1,56 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var documentSchema = new Schema({
+var DocumentSchema = new Schema({
 	// _id: { 
  //    	type: 'String',
  //    	default: function() { 
  //    		return new Date().getTime().toString(8)
  //    	} 
  //    },
-	poster: String,
-	categories: [{
-		type: String
-	}],
-	title: String,
+	name: String,
+    postedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
+    },
+    nameKhongDau : String,
 	desc: String,
-	url: String,
+	urlFile: [{ 
+		type: String,
+	}],
+	createdat:{ 
+		type: Date, 
+		default: Date.now 
+	},
+	viewnumber:{
+        type: Number,
+        default: 0
+    },
+	downloadnumber:{
+        type: Number,
+        default: 0
+    },
+	coin:{
+        type: Number,
+        default: 0
+    },
+	diamond:{
+        type: Number,
+        default: 0
+    },
 	content: String,
-	tag: [{
+	tag: [{ 
 		type: String
 	}],
-	view: {type: Number, default: 0},
-	status: String //Highlights, Normal
-}, {timestamps: true});
+	comments: [{
+        text: String,
+        postedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'users'
+        }
+    }],
+    gradeid: Number,
+    subjectid: Number
+}, {timestamps: true}, {collection : 'documents'});
 
-// documentSchema.virtual('id').get(function() {
-//     return this._id.toHexString();
-// });
-
-module.exports = mongoose.model('Document', documentSchema);
+module.exports = mongoose.model('Document', DocumentSchema);
