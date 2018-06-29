@@ -1,8 +1,8 @@
 var settings = {
     site_version: "1.0.0",
-    site_name: 'BKFA Docuent',
-    site_title: 'bkfa.net',
-    site_description: 'Website tài liệu lớn nhất Việt Nam - Top1',
-}
+    site_name: 'Loga.vn',
+    site_title: 'loga.vn',
+    site_description: 'Website tài liệu cho học sinh sinh viên',
+};
 
 module.exports = settings;
