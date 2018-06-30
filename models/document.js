@@ -2,12 +2,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DocumentSchema = new Schema({
-	// _id: { 
- //    	type: 'String',
- //    	default: function() { 
- //    		return new Date().getTime().toString(8)
- //    	} 
- //    },
 	name: String,
     postedBy: {
         type: mongoose.Schema.Types.ObjectId,

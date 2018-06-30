@@ -8,10 +8,10 @@ exports.index = function(req, res, next){
 		});
 		console.log(document);
 	});
-}
+};
 
 exports.trangchu = function(req, res, next){
  	Document.find().then(function(data){
  		res.json(data);
  	});
-}
+};

@@ -1,12 +1,11 @@
 {
-  "name": "bkfajs",
-  "version": "0.0.0",
+  "name": "loga",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "gulp;nodemon ./bin/www "
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^6.0.0",

@@ -12,7 +12,6 @@ var PaymentSchema = new Schema({
 		ref: 'documents'
 	},
 	st : String
-ư
-}, {timestamps: true}, {collection : 'payment'});
+}, {timestamps: true}, {collection : 'payments'});
 
 module.exports = mongoose.model('Payment', PaymentSchema);
