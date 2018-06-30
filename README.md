@@ -1,2 +1,0 @@
-# Loga
-## NodeJS + MongoDB
