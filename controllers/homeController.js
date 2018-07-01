@@ -1,12 +1,13 @@
 var Document = require('../models/document');
+var User = require('../models/user');
 
 exports.index = function(req, res, next){
-    Document.find().then(function(document){
-		res.render('index',{
+    User.find().then(function(user){
+		res.send({
 			title: 'Trang chủ',
-			document: document
+			user: user
 		});
-		console.log(document);
+		console.log(user);
 	});
 };
 

@@ -2,25 +2,31 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var DocumentSchema = new Schema({
-	name: String,
-    postedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+	name: {
+        type: String,
+        index: true
     },
-    nameKhongDau : String,
-	desc: String,
-	urlFile: [{ 
+    posted_by: {
+        id_user: Number,
+        user_name: String
+    },
+    name_khong_dau: String,
+	description: {
+        type: String,
+        index: true
+    },
+	url_file: [{ 
 		type: String,
 	}],
-	createdat:{ 
+	created_at:{ 
 		type: Date, 
 		default: Date.now 
 	},
-	viewnumber:{
+	view_number:{
         type: Number,
         default: 0
     },
-	downloadnumber:{
+	download_number:{
         type: Number,
         default: 0
     },
@@ -32,19 +38,23 @@ var DocumentSchema = new Schema({
         type: Number,
         default: 0
     },
-	content: String,
+	content:{
+        type: String,
+        index: true
+    },
 	tag: [{ 
-		type: String
+		type: mongoose.Schema.Types.ObjectId,
+        ref: 'tags'
 	}],
 	comments: [{
         text: String,
         postedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'users'
+            id_user: Number,
+            user_name: String
         }
     }],
-    gradeid: Number,
-    subjectid: Number
+    grade_id: Number,
+    subject_id: Number
 }, {timestamps: true}, {collection : 'documents'});
 
 module.exports = mongoose.model('Document', DocumentSchema);
