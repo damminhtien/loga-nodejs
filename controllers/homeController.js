@@ -1,8 +1,7 @@
 var Document = require('../models/document');
-var User = require('../models/user');
 
 exports.index = function(req, res, next){
-    User.find().then(function(user){
+    Document.find().then(function(user){
 		res.send({
 			title: 'Trang chủ',
 			user: user
