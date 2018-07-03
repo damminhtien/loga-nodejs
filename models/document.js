@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var DocumentSchema = new Schema({
+var document_schema = new Schema({
+    
 	name: {
         type: String,
         index: true
@@ -18,10 +19,6 @@ var DocumentSchema = new Schema({
 	url_file: [{ 
 		type: String,
 	}],
-	created_at:{ 
-		type: Date, 
-		default: Date.now 
-	},
 	view_number:{
         type: Number,
         default: 0
@@ -43,18 +40,18 @@ var DocumentSchema = new Schema({
         index: true
     },
 	tag: [{ 
-		type: mongoose.Schema.Types.ObjectId,
-        ref: 'tags'
+		type: String, 
 	}],
-	comments: [{
-        text: String,
+	comment: [{
+         _id: false,
+        text: {type: String},
         postedBy: {
-            id_user: Number,
-            user_name: String
+            id_user:{type: Number},
+            user_name:{type: String}
         }
     }],
     grade_id: Number,
     subject_id: Number
 }, {timestamps: true}, {collection : 'documents'});
 
-module.exports = mongoose.model('Document', DocumentSchema);
+module.exports = mongoose.model('Document', document_schema);

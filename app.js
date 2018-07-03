@@ -10,9 +10,10 @@ var mongoose = require('mongoose');
 var settings = require('./config/settings');
 var database = require('./config/database');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
+var adminRouter = require('./routes/admin');
+var inderRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 var app = express();
 
 mongoose.connect(database.dbStr);
@@ -30,14 +31,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
+app.use('/admin', adminRouter);
+app.use('/', inderRouter);
 app.use('/users', usersRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,7 +49,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err);
 });
 
 module.exports = app;
