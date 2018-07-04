@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+const Schema = mongoose.Schema;
 
-var document_schema = new Schema({
-    
+let document_schema = new Schema({
 	name: {
         type: String,
         index: true
@@ -43,15 +43,16 @@ var document_schema = new Schema({
 		type: String, 
 	}],
 	comment: [{
-         _id: false,
-        text: {type: String},
+        text: String,
         postedBy: {
-            id_user:{type: Number},
-            user_name:{type: String}
+            id_user: Number,
+            user_name: String
         }
     }],
     grade_id: Number,
     subject_id: Number
 }, {timestamps: true}, {collection : 'documents'});
+
+document_schema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model('Document', document_schema);

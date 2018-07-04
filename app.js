@@ -1,20 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var ejs = require('ejs');
-var mongoose = require('mongoose');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const ejs = require('ejs');
+const mongoose = require('mongoose');
 
-var settings = require('./config/settings');
-var database = require('./config/database');
+const settings = require('./config/settings');
+const database = require('./config/database');
 
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const adminRouter = require('./routes/admin');
 
-var adminRouter = require('./routes/admin');
-var inderRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var app = express();
+const app = express();
 
 mongoose.connect(database.dbStr);
 mongoose.connection.on('error', function(err){
