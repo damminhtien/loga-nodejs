@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+const Schema = mongoose.Schema;
 
 var DocumentSchema = new Schema({
 	name: {
@@ -56,5 +57,7 @@ var DocumentSchema = new Schema({
     grade_id: Number,
     subject_id: Number
 }, {timestamps: true}, {collection : 'documents'});
+
+UserSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
 module.exports = mongoose.model('Document', DocumentSchema);

@@ -1,4 +1,4 @@
-var Document = require('../models/document');
+const Document = require('../models/document');
 
 exports.index = function(req, res, next){
     Document.find().then(function(user){
