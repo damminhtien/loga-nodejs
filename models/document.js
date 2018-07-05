@@ -53,6 +53,6 @@ let document_schema = new Schema({
     subject_id: Number
 }, {timestamps: true}, {collection : 'documents'});
 
-document_schema.plugin(AutoIncrement, {inc_field: 'id'});
+document_schema.plugin(AutoIncrement, {inc_field: 'id_document'});
 
 module.exports = mongoose.model('Document', document_schema);
