@@ -2,57 +2,57 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
-let document_schema = new Schema({
-	name: {
+let documentSchema = new Schema({
+    name: {
         type: String,
-        index: true
+        index: true,
     },
     posted_by: {
         id_user: Number,
-        user_name: String
+        user_name: String,
     },
     name_khong_dau: String,
-	description: {
+    description: {
         type: String,
-        index: true
+        index: true,
     },
-	url_file: [{ 
-		type: String,
-	}],
-	view_number:{
-        type: Number,
-        default: 0
-    },
-	download_number:{
-        type: Number,
-        default: 0
-    },
-	coin:{
-        type: Number,
-        default: 0
-    },
-	diamond:{
-        type: Number,
-        default: 0
-    },
-	content:{
+    url_file: [{
         type: String,
-        index: true
+    }],
+    view_number: {
+        type: Number,
+        default: 0,
     },
-	tag: [{ 
-		type: String, 
-	}],
-	comment: [{
+    download_number: {
+        type: Number,
+        default: 0,
+    },
+    coin: {
+        type: Number,
+        default: 0,
+    },
+    diamond: {
+        type: Number,
+        default: 0,
+    },
+    content: {
+        type: String,
+        index: true,
+    },
+    tag: [{
+        type: String,
+    }],
+    comment: [{
         text: String,
         postedBy: {
             id_user: Number,
-            user_name: String
-        }
+            user_name: String,
+        },
     }],
     grade_id: Number,
-    subject_id: Number
-}, {timestamps: true}, {collection : 'documents'});
+    subject_id: Number,
+}, {timestamps: true}, {collection: 'documents'});
 
-document_schema.plugin(AutoIncrement, {inc_field: 'id_document'});
+documentSchema.plugin(AutoIncrement, {inc_field: 'id_document'});
 
-module.exports = mongoose.model('Document', document_schema);
+module.exports = mongoose.model('Document', documentSchema);

@@ -4,10 +4,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const ejs = require('ejs');
 const mongoose = require('mongoose');
 
-const settings = require('./config/settings');
 const database = require('./config/database');
 
 const indexRouter = require('./routes/index');
@@ -16,7 +14,7 @@ const adminRouter = require('./routes/admin');
 const app = express();
 
 mongoose.connect(database.dbStr);
-mongoose.connection.on('error', function(err){
+mongoose.connection.on('error', function(err) {
   console.log('Error connect to Database: ' + err);
 });
 
@@ -26,7 +24,7 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

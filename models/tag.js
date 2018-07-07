@@ -2,26 +2,26 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 const Schema = mongoose.Schema;
 
-var TagSchema = new Schema({
-	name: {
+let tagSchema = new Schema({
+    name: {
         type: String,
-        index: true
+        index: true,
     },
     name_khong_dau: String,
-	description: {
+    description: {
         type: String,
-        index: true
+        index: true,
     },
-	created_at:{ 
-		type: Date, 
-		default: Date.now 
+    created_at: {
+        type: Date,
+        default: Date.now,
     },
-    has_number_post:{
+    has_number_post: {
         type: Number,
-        default: 0
-    }
-}, {timestamps: true}, {collection : 'documents'});
+        default: 0,
+    },
+}, {timestamps: true}, {collection: 'tags'});
 
-TagSchema.plugin(AutoIncrement, {inc_field: 'id'});
+tagSchema.plugin(AutoIncrement, {inc_field: 'id'});
 
-module.exports = mongoose.model('Document', DocumentSchema);
+module.exports = mongoose.model('Tag', tagSchema);

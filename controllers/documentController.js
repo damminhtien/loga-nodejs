@@ -1,48 +1,19 @@
-const mongoose_document = require('../models/document');
-const mongoose_tag = require('../models/tag');
+const Document = require('../models/document');
+const Tag = require('../models/tag');
 const change_alias = require('../config/function');
 
 const multer = require('multer');
-const Router = require('express')
-const router = new Router()
-const bodyParser = require('body-parser')
-const urlencodedParser = bodyParser.urlencoded({ extended: true })
-router.use(bodyParser.urlencoded({ extended: true }))
-
-// -----------------------------------------------------------
-// trang index
-exports.index = function(req, res, next) {
-    mongoose_document.find().then(function(document) {
-        res.send({
-            title: 'Trang chủ admin',
-            user: document
-        });
-    });
-}
-// -----------------------------------------------------------
-// xử lý upload file
-var storage = multer.diskStorage({
-    destination: './public/uploads/images/',
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now() + ".jpg");
-    }
-});
-const upload = multer({ storage: storage }).single('images');
+const Router = require('express');
+const router = new Router();
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
+router.use(bodyParser.urlencoded({ extended: true }));
 
 // -----------------------------------------------------------
 // xoa document
 exports.xoa = function(req, res, next) {
-    mongoose_document.findByIdAndRemove(req.params.id, function(err) {});
+    Document.findByIdAndRemove(req.params.id, function(err) {});
     res.redirect('../');
-};
-
-// -----------------------------------------------------------
-// view sua document
-exports.getsua = function(req, res, next) {
-    res.send({
-        title: 'đăng ký',
-        id: req.params.id
-    });
 };
 
 // -----------------------------------------------------------
@@ -90,6 +61,15 @@ exports.postsua = function(req, res, next) {
         //tìm id và sửa bằng file json
         mongoose_document.findByIdAndUpdate(req.params.id, obj, { new: true }).then(console.log("update thanh cong"));
         res.redirect('../admin');
+    });
+};
+
+// -----------------------------------------------------------
+// view sua document
+exports.getsua = function(req, res, next) {
+    res.send({
+        title: 'đăng ký',
+        id: req.params.id
     });
 };
 
@@ -142,17 +122,4 @@ exports.postthem = function(req, res, next) {
                 }
             });
     });
-}
-
-// ---------------------------------------------------------------------
-exports.postthemtag = function(req, res, next) {
-    upload(req, res, function(err) {
-        const tag_name = req.body.name;
-        console.log(tag_name)
-        const tag = req.body.tag;
-        mongoose_tag.create({
-            tag_name: tag_name,
-            document_id: tag
-        })
-    })
-}
+};

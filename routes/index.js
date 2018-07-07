@@ -1,15 +1,15 @@
 const express = require('express');
 let router = express.Router();
 
-//Require Controllers Module
-const home_controller = require('../controllers/homeController');
+// Require Controllers Module
+const homeController = require('../controllers/homeController');
 
 /* GET home page. */
-router.get('/', home_controller.index);
+router.get('/', homeController.index);
 
-router.get('/:tenkodau', home_controller.getchitiet);
-router.post('/:tenkodau', home_controller.postchitiet);
+router.get('/:tenkodau', homeController.getchitiet);
+router.post('/:tenkodau', homeController.postchitiet);
 
-router.get('/trangchu', home_controller.trangchu);
+router.get('/trangchu', homeController.trangchu);
 
 module.exports = router;
