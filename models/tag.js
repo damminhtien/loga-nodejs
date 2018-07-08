@@ -7,7 +7,7 @@ let tagSchema = new Schema({
         type: String,
         index: true,
     },
-    name_khong_dau: String,
+    ansi_name: String,
     description: {
         type: String,
         index: true,
@@ -20,8 +20,8 @@ let tagSchema = new Schema({
         type: Number,
         default: 0,
     },
-}, {timestamps: true}, {collection: 'tags'});
+}, {timestamps: true}, {collection: 'tags'}, {_id: false});
 
-tagSchema.plugin(AutoIncrement, {inc_field: 'id'});
+tagSchema.plugin(AutoIncrement);
 
 module.exports = mongoose.model('Tag', tagSchema);

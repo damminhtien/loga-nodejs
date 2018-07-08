@@ -11,7 +11,7 @@ let documentSchema = new Schema({
         id_user: Number,
         user_name: String,
     },
-    name_khong_dau: String,
+    ansi_name: String,
     description: {
         type: String,
         index: true,
@@ -51,8 +51,8 @@ let documentSchema = new Schema({
     }],
     grade_id: Number,
     subject_id: Number,
-}, {timestamps: true}, {collection: 'documents'});
+}, {timestamps: true}, {collection: 'documents'}, {_id: false});
 
-documentSchema.plugin(AutoIncrement, {inc_field: 'id_document'});
+documentSchema.plugin(AutoIncrement);
 
 module.exports = mongoose.model('Document', documentSchema);
