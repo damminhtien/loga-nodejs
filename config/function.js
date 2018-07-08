@@ -19,4 +19,22 @@ module.exports = {
         str = str.replace(/ /g, '-');
         return str;
     },
+    getFileName(file, res) {
+        let fileName = Date.now() + Math.floor((Math.random() * 100) + 1) + file.name;
+        if (fileName.length >= 255) fileName = fileName.slice(fileName.length-100, 100);
+        file.mv('./public/upload/files/tep/'+fileName, (err) => {
+            if (err) return res.status(500).send(err);
+            return true;
+        });
+        return fileName;
+    },
+    getImgName(img, res) {
+        let imgName = Date.now() + Math.floor((Math.random() * 100) + 1) + img.name;
+        if (imgName.length >= 255) imgName = imgName.slice(imgName.length-100, 100);
+        img.mv('./public/uploads/images/'+imgName, (err) => {
+            if (err) return res.status(500).send(err);
+            return true;
+        });
+        return imgName;
+    },
 };
