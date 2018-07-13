@@ -1,11 +1,33 @@
 const multer = require('multer');
+const func = require('../config/function');
 
-// -----------------------------------------------------------
-// xử lý upload file
-const storageImage = multer.diskStorage({
-    destination: './public/uploads/images/',
-    filename: function(req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now() + '.jpg');
-    },
+const storageImg = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '/uploads/images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, func.getFileName(file.fieldname));
+  },
 });
-const uploadImage = multer({storage: storageImage}).single('images');
+
+const uploadImg = multer({
+  storage: storageImg,
+});
+
+const storageFile = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, '/uploads/files');
+  },
+  filename: (req, file, cb) => {
+    cb(null, func.getFileName(file.fieldname));
+  },
+});
+
+const uploadFile = multer({
+  storage: storageFile,
+});
+
+exports = {
+  uploadImg: uploadImg,
+  uploadFile: uploadFile,
+};

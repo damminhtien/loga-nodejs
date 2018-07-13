@@ -1,6 +1,6 @@
 module.exports = {
     // doi chu co dau sang khong dau
-    change_alias: function(string) {
+    change_alias(string) {
         let str = string;
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, 'a');
         str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, 'e');
@@ -19,22 +19,9 @@ module.exports = {
         str = str.replace(/ /g, '-');
         return str;
     },
-    getFileName(file, res) {
-        let fileName = Date.now() + Math.floor((Math.random() * 100) + 1) + file.name;
-        if (fileName.length >= 255) fileName = fileName.slice(fileName.length-100, 100);
-        file.mv('./public/upload/files/tep/'+fileName, (err) => {
-            if (err) return res.status(500).send(err);
-            return true;
-        });
-        return fileName;
-    },
-    getImgName(img, res) {
-        let imgName = Date.now() + Math.floor((Math.random() * 100) + 1) + img.name;
-        if (imgName.length >= 255) imgName = imgName.slice(imgName.length-100, 100);
-        img.mv('./public/uploads/images/'+imgName, (err) => {
-            if (err) return res.status(500).send(err);
-            return true;
-        });
-        return imgName;
+    getFileName(fileName) {
+        let name = Date.now() + Math.floor((Math.random() * 100) + 1) + fileName;
+        if (name.length >= 255) name = name.slice(name.length-100, 100);
+        return name;
     },
 };

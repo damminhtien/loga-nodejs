@@ -8,12 +8,11 @@ const mongoose = require('mongoose');
 
 const database = require('./config/database');
 
-const indexRouter = require('./routes/index');
-const adminRouter = require('./routes/admin');
+const documentRouter = require('./routes/document.js');
 
 const app = express();
 
-mongoose.connect(database.dbStr);
+mongoose.connect(database.dbStr, {useNewUrlParser: true});
 mongoose.connection.on('error', function(err) {
   console.log('Error connect to Database: ' + err);
 });
@@ -28,8 +27,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/admin', adminRouter);
-app.use('/', indexRouter);
+app.use('/document', documentRouter);
 
 
 // catch 404 and forward to error handler

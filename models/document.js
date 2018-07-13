@@ -7,18 +7,22 @@ let documentSchema = new Schema({
         type: String,
         index: true,
     },
-    posted_by: {
-        id_user: Number,
-        user_name: String,
-    },
     ansi_name: String,
     description: {
         type: String,
         index: true,
     },
-    url_file: [{
+    posted_by: {
+        id_user: Number,
+        user_name: String,
+    },
+    url_file: {
         type: String,
-    }],
+    },
+    url_img: {
+        type: String,
+        default: 'document-default.png',
+    },
     view_number: {
         type: Number,
         default: 0,
