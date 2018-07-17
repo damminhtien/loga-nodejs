@@ -12,9 +12,6 @@ let tagSchema = new Schema({
         type: String,
         index: true,
     },
-    has_docs: [{
-        type: String,
-    }],
 }, {timestamps: true}, {collection: 'tags'}, {_id: false});
 
 tagSchema.plugin(AutoIncrement);

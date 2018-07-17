@@ -43,10 +43,10 @@ let documentSchema = new Schema({
         type: String,
         index: true,
     },
-    tag: [{
+    tags: [{
         type: String,
     }],
-    comment: [{
+    comments: [{
         text: String,
         postedBy: {
             id_user: Number,
