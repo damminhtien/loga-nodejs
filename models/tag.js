@@ -12,14 +12,9 @@ let tagSchema = new Schema({
         type: String,
         index: true,
     },
-    created_at: {
-        type: Date,
-        default: Date.now,
-    },
-    has_number_post: {
-        type: Number,
-        default: 0,
-    },
+    has_docs: [{
+        type: String,
+    }],
 }, {timestamps: true}, {collection: 'tags'}, {_id: false});
 
 tagSchema.plugin(AutoIncrement);
