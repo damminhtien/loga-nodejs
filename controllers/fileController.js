@@ -6,7 +6,7 @@ const storageImg = multer.diskStorage({
     cb(null, '/uploads/images');
   },
   filename: (req, file, cb) => {
-    cb(null, func.getFileName(file.fieldname));
+    cb(null, func.getFileName(file.originalname));
   },
 });
 
@@ -19,7 +19,7 @@ const storageFile = multer.diskStorage({
     cb(null, '/uploads/files');
   },
   filename: (req, file, cb) => {
-    cb(null, func.getFileName(file.fieldname));
+    cb(null, func.getFileName(file.originalname));
   },
 });
 
@@ -27,7 +27,7 @@ const uploadFile = multer({
   storage: storageFile,
 });
 
-exports = {
+module.exports = {
   uploadImg: uploadImg,
   uploadFile: uploadFile,
 };
