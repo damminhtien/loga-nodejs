@@ -33,7 +33,7 @@ module.exports = {
         "jsx": true
     },
     "rules": {
-        "camelcase": 1, // require camel case names
+        "camelcase": 0, // require camel case names
         "comma-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after comma
         "comma-style": [1, "last"], // enforce one true comma style (off by default)
         "consistent-this": [1, "_this"], // enforces consistent naming when capturing the current execution context (off by default)
