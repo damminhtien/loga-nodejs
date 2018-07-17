@@ -1,12 +1,15 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+let router = express.Router();
 
-//Require Controllers Module
-var home_controller = require('../controllers/homeController');
+// Require Controllers Module
+const homeController = require('../controllers/homeController');
 
 /* GET home page. */
-router.get('/', home_controller.index);
+router.get('/', homeController.index);
 
-router.post('/trangchu', home_controller.trangchu);
+router.get('/:tenkodau', homeController.getchitiet);
+router.post('/:tenkodau', homeController.postchitiet);
+
+router.get('/trangchu', homeController.trangchu);
 
 module.exports = router;

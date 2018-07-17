@@ -1,22 +1,19 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var logger = require('morgan');
-var ejs = require('ejs');
-var mongoose = require('mongoose');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose');
 
-var settings = require('./config/settings');
-var database = require('./config/database');
+const database = require('./config/database');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const documentRouter = require('./routes/document.js');
 
-var app = express();
+const app = express();
 
-mongoose.connect(database.dbStr);
-mongoose.connection.on('error', function(err){
+mongoose.connect(database.dbStr, {useNewUrlParser: true});
+mongoose.connection.on('error', function(err) {
   console.log('Error connect to Database: ' + err);
 });
 
@@ -26,18 +23,12 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/document', documentRouter);
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -52,7 +43,7 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send(err);
 });
 
 module.exports = app;

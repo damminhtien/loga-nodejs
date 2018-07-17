@@ -1,50 +1,62 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+const Schema = mongoose.Schema;
 
-var DocumentSchema = new Schema({
-	name: String,
-    postedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+let documentSchema = new Schema({
+    name: {
+        type: String,
+        index: true,
     },
-    nameKhongDau : String,
-	desc: String,
-	urlFile: [{ 
-		type: String,
-	}],
-	createdat:{ 
-		type: Date, 
-		default: Date.now 
-	},
-	viewnumber:{
+    ansi_name: String,
+    description: {
+        type: String,
+        index: true,
+    },
+    posted_by: {
+        id_user: Number,
+        user_name: String,
+    },
+    url_file: {
+        type: String,
+    },
+    url_img: {
+        type: String,
+        default: 'document-default.png',
+    },
+    view_number: {
         type: Number,
-        default: 0
+        default: 0,
     },
-	downloadnumber:{
+    download_number: {
         type: Number,
-        default: 0
+        default: 0,
     },
-	coin:{
+    coin: {
         type: Number,
-        default: 0
+        default: 0,
     },
-	diamond:{
+    diamond: {
         type: Number,
-        default: 0
+        default: 0,
     },
-	content: String,
-	tag: [{ 
-		type: String
-	}],
-	comments: [{
+    content: {
+        type: String,
+        index: true,
+    },
+    tags: [{
+        type: String,
+    }],
+    comments: [{
         text: String,
         postedBy: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'users'
-        }
+            id_user: Number,
+            user_name: String,
+        },
     }],
-    gradeid: Number,
-    subjectid: Number
-}, {timestamps: true}, {collection : 'documents'});
+    grade_id: Number,
+    subject_id: Number,
+}, {timestamps: true}, {collection: 'documents'}, {_id: false});
 
-module.exports = mongoose.model('Document', DocumentSchema);
+documentSchema.plugin(AutoIncrement);
+
+module.exports = mongoose.model('Document', documentSchema);
