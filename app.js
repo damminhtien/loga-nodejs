@@ -17,10 +17,6 @@ mongoose.connection.on('error', function(err) {
   console.log('Error connect to Database: ' + err);
 });
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
