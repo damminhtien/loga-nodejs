@@ -12,3 +12,5 @@
 * PUT: update
 * DELETE: delete
 * HTTP code: 200 - success, 500 - error in server, 300 - request redirect.
+## Full document and design pattern
+[PDF](http://bit.ly/loganodejs)
